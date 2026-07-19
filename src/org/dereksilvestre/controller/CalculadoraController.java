@@ -83,6 +83,21 @@ public class CalculadoraController {
             actualizarPantalla(pantalla);
         }
 
+        // Porcentaje
+        else if (entrada.equals("%")) {
+
+            if (!opcion2.isEmpty()) {
+                opcion2 = calcularPorcentaje(opcion2);
+
+            } else if (!opcion1.isEmpty()
+                    && !opcion1.equals("Error")) {
+
+                opcion1 = calcularPorcentaje(opcion1);
+            }
+
+            actualizarPantalla(pantalla);
+        }
+
         // Botón igual
         else if (entrada.equals("=")) {
 
