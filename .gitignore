@@ -1,0 +1,17 @@
+# NetBeans Specific Files
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+.nb-gradle/
+
+# Build and Distribution Directories
+build/
+nbbuild/
+dist/
+nbdist/
+
+# Common build outputs (Optional but recommended)
+*.class
+*.jar
+*.war
+*.ear
