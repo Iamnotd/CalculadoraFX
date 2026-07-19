@@ -112,8 +112,8 @@ public class CalculadoraView {
                 TipoBoton.ESPECIAL
         );
 
-        Button btnEliminar = crearBoton(
-                "⌫",
+        Button btnRaiz = crearBoton(
+                "√",
                 TipoBoton.ESPECIAL
         );
 
@@ -206,31 +206,31 @@ public class CalculadoraView {
                 TipoBoton.OPERADOR
         );
 
-        // Primera fila
+        // Agregar primera fila
         cuadroBotones.add(btnBorrar, 0, 0);
-        cuadroBotones.add(btnEliminar, 1, 0);
+        cuadroBotones.add(btnRaiz, 1, 0);
         cuadroBotones.add(btnPorcentaje, 2, 0);
         cuadroBotones.add(btnDividir, 3, 0);
 
-        // Segunda fila
+        // Agregar segunda fila
         cuadroBotones.add(btnSiete, 0, 1);
         cuadroBotones.add(btnOcho, 1, 1);
         cuadroBotones.add(btnNueve, 2, 1);
         cuadroBotones.add(btnMultiplicar, 3, 1);
 
-        // Tercera fila
+        // Agregar tercera fila
         cuadroBotones.add(btnCuatro, 0, 2);
         cuadroBotones.add(btnCinco, 1, 2);
         cuadroBotones.add(btnSeis, 2, 2);
         cuadroBotones.add(btnMenos, 3, 2);
 
-        // Cuarta fila
+        // Agregar cuarta fila
         cuadroBotones.add(btnUno, 0, 3);
         cuadroBotones.add(btnDos, 1, 3);
         cuadroBotones.add(btnTres, 2, 3);
         cuadroBotones.add(btnMas, 3, 3);
 
-        // Quinta fila
+        // Agregar quinta fila
         cuadroBotones.add(
                 btnCero,
                 0,

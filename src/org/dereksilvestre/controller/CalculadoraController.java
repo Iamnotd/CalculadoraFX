@@ -82,6 +82,22 @@ public class CalculadoraController {
 
             actualizarPantalla(pantalla);
         }
+        
+        // Raíz cuadrada
+        else if (entrada.equals("√")) {
+
+             if (!opcion2.isEmpty()) {
+        opcion2 = calcularRaizCuadrada(opcion2);
+
+            } else if (!opcion1.isEmpty()
+            && !opcion1.equals("Error")) {
+
+        opcion1 = calcularRaizCuadrada(opcion1);
+         }
+
+    calculoTerminado = true;
+    actualizarPantalla(pantalla);
+        }
 
         // Porcentaje
         else if (entrada.equals("%")) {
@@ -184,6 +200,19 @@ public class CalculadoraController {
 
         return formatearResultado(resultado);
     }
+    
+    private String calcularRaizCuadrada(String numero) {
+
+    double valor = Double.parseDouble(numero);
+
+    if (valor < 0) {
+        return "Error";
+    }
+
+    double resultado = Math.sqrt(valor);
+
+    return formatearResultado(resultado);
+}
 
     private String ejecutarOperacion(
             String numeroUno,
