@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e4cb573 (Se modifico el README.md)
 # Proyecto de Hoja de trabajo 1
 Sobre elementos basisocs de JavaFX, calculadora con funciones basicas y raiz,potencia, punto decimal y porcentaje
 
@@ -24,9 +20,3 @@ org.dereksilvestre
     - (Sugerido) OBS - greabar - microfono.
     - Presente su calculadora funcionando: operaciones, operaciones extra
     - presente la estructura de su codigo.
-<<<<<<< HEAD
-=======
-Adjuntar el enlace del video para la tarea 
->>>>>>> 9412c45 (Agregue readme)
-=======
->>>>>>> e4cb573 (Se modifico el README.md)
