@@ -16,46 +16,16 @@ public class CalculadoraController {
 
     public void procesoDeEntrada(String entrada, Label pantalla) {
 
-        // Botón C: limpiar toda la calculadora
+        // Limpiar toda la calculadora
         if (entrada.equals("C")) {
             limpiarCalculadora();
-            pantalla.setText("0");
-            return;
-        }
-
-        // Botón para eliminar el último carácter
-        if (entrada.equals("⌫")) {
-
-            if (calculoTerminado) {
-                limpiarCalculadora();
-                actualizarPantalla(pantalla);
-                return;
-            }
-
-            if (!opcion2.isEmpty()) {
-                opcion2 = opcion2.substring(
-                        0,
-                        opcion2.length() - 1
-                );
-
-            } else if (!operador.isEmpty()) {
-                operador = "";
-
-            } else if (!opcion1.isEmpty()) {
-                opcion1 = opcion1.substring(
-                        0,
-                        opcion1.length() - 1
-                );
-            }
-
             actualizarPantalla(pantalla);
             return;
         }
 
-        // Entrada de números y punto decimal
+        // Números y punto decimal
         if (entrada.matches("[0-9]") || entrada.equals(".")) {
 
-            // Si ya había un resultado, comienza un cálculo nuevo
             if (calculoTerminado) {
                 limpiarCalculadora();
             }
@@ -67,40 +37,42 @@ public class CalculadoraController {
             }
 
             actualizarPantalla(pantalla);
+            return;
         }
 
-        // Operadores
-        else if (esOperador(entrada)) {
+        // Operadores básicos
+        if (esOperador(entrada)) {
 
             if (opcion1.isEmpty() || opcion1.equals("Error")) {
                 return;
             }
 
-            // Permite cambiar el operador antes de escribir opcion2
             operador = normalizarOperador(entrada);
             calculoTerminado = false;
 
             actualizarPantalla(pantalla);
+            return;
         }
-        
-        // Raíz cuadrada
-        else if (entrada.equals("√")) {
 
-             if (!opcion2.isEmpty()) {
-        opcion2 = calcularRaizCuadrada(opcion2);
+        // Raíz cuadrada
+        if (entrada.equals("√")) {
+
+            if (!opcion2.isEmpty()) {
+                opcion2 = calcularRaizCuadrada(opcion2);
 
             } else if (!opcion1.isEmpty()
-            && !opcion1.equals("Error")) {
+                    && !opcion1.equals("Error")) {
 
-        opcion1 = calcularRaizCuadrada(opcion1);
-         }
+                opcion1 = calcularRaizCuadrada(opcion1);
+            }
 
-    calculoTerminado = true;
-    actualizarPantalla(pantalla);
+            calculoTerminado = operador.isEmpty();
+            actualizarPantalla(pantalla);
+            return;
         }
 
         // Porcentaje
-        else if (entrada.equals("%")) {
+        if (entrada.equals("%")) {
 
             if (!opcion2.isEmpty()) {
                 opcion2 = calcularPorcentaje(opcion2);
@@ -111,11 +83,13 @@ public class CalculadoraController {
                 opcion1 = calcularPorcentaje(opcion1);
             }
 
+            calculoTerminado = operador.isEmpty();
             actualizarPantalla(pantalla);
+            return;
         }
 
-        // Botón igual
-        else if (entrada.equals("=")) {
+        // Resultado
+        if (entrada.equals("=")) {
 
             if (!opcion1.isEmpty()
                     && !opcion2.isEmpty()
@@ -127,8 +101,8 @@ public class CalculadoraController {
                         operador
                 );
 
-                opcion2 = "";
                 operador = "";
+                opcion2 = "";
                 calculoTerminado = true;
             }
 
@@ -141,21 +115,24 @@ public class CalculadoraController {
             String entrada
     ) {
 
-        // No permite colocar dos puntos
+        // Evita más de un punto decimal
         if (entrada.equals(".")
                 && numeroActual.contains(".")) {
+
             return numeroActual;
         }
 
-        // Convierte "." en "0."
+        // Si el usuario comienza con punto, se convierte en 0.
         if (entrada.equals(".")
                 && numeroActual.isEmpty()) {
+
             return "0.";
         }
 
-        // Evita números como 00005
+        // Evita números como 0005
         if (numeroActual.equals("0")
                 && !entrada.equals(".")) {
+
             return entrada;
         }
 
@@ -200,19 +177,19 @@ public class CalculadoraController {
 
         return formatearResultado(resultado);
     }
-    
+
     private String calcularRaizCuadrada(String numero) {
 
-    double valor = Double.parseDouble(numero);
+        double valor = Double.parseDouble(numero);
 
-    if (valor < 0) {
-        return "Error";
+        if (valor < 0) {
+            return "Error";
+        }
+
+        double resultado = Math.sqrt(valor);
+
+        return formatearResultado(resultado);
     }
-
-    double resultado = Math.sqrt(valor);
-
-    return formatearResultado(resultado);
-}
 
     private String ejecutarOperacion(
             String numeroUno,
@@ -256,7 +233,6 @@ public class CalculadoraController {
 
     private String formatearResultado(double resultado) {
 
-        // Evita mostrar valores como 5.0
         if (resultado == Math.rint(resultado)
                 && resultado <= Integer.MAX_VALUE
                 && resultado >= Integer.MIN_VALUE) {
